@@ -1,12 +1,17 @@
-Jenkinsfile (Declarative Pipeline)
-/* Requires the Docker Pipeline plugin */
+//To get the content of Release page
 pipeline {
-    agent { docker { image 'php:8.1.11-alpine' } }
+    agent any
+
     stages {
-        stage('build') {
+         stage('build') {
             steps {
-                sh 'php --version'
+                sh 'curl -D- \
+   -X GET \
+   -H "Authorization: Basic a2xtaXR0YWxAbHV0cm9uLmNvbTpiTklzOGlpT3ZneFhhbURsQ3l5RDdEQkM=" \
+   -H "Content-Type: application/json" \
+   "https://lutron.atlassian.net/wiki/rest/api/content/149245035?expand=body.storage"'
             }
         }
     }
 }
+
